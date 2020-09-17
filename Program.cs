@@ -8,6 +8,7 @@ namespace NumberGuess
         {
             Random rand = new Random();
             int hidden;
+            string msg = "";
             while (true)    // this loop is the game loop
             {
                 hidden = rand.Next(100);
@@ -15,13 +16,29 @@ namespace NumberGuess
                 int guess = Convert.ToInt32(Console.ReadLine());
                 while (guess != hidden)
                 {
+                    if (Math.Abs(guess - hidden) > 10)
+                    {
+                        msg = "... and you are cold!";
+                    }
+                    else
+                    {
+                        if (Math.Abs(guess - hidden) < 5)
+                        {
+                            msg = "... and you are hot!";
+                        }
+                        else
+                        {
+                            msg = "... and you are warm!";
+                        }
+                    }
                     if (guess<hidden)
                     {
-                        Console.WriteLine("too low");
+                        Console.WriteLine("too low" + msg);
+                        
                     }
                     if (guess>hidden)
                     {
-                        Console.WriteLine("too high");
+                        Console.WriteLine("too high" + msg);
                     }
                     Console.Write("Guess again: ");
                     guess = Convert.ToInt32(Console.ReadLine());
